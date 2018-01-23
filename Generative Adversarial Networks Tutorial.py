@@ -40,7 +40,7 @@ import tensorflow as tf
 import random
 import numpy as np
 import matplotlib.pyplot as plt
-get_ipython().magic(u'matplotlib inline')
+# get_ipython().magic(u'matplotlib inline')
 
 
 # Now, we have to import our MNIST images. To do this, we’ll call a TF function called read_data_sets. This loads in the 55,000 training examples in the MNIST database. 
@@ -241,7 +241,7 @@ temp = (sess.run(sample_image, feed_dict={z_test_placeholder: test_z}))
 my_i = temp.squeeze()
 plt.imshow(my_i, cmap='gray_r')
 plt.show()
-
+plt.savefig('Before Generator.png')
 
 # Not a very convincing MNIST digit right? Let’s look at how we can make our generator better. Enter loss functions and optimization!
 
@@ -333,11 +333,13 @@ for i in range(iterations):
 # In[ ]:
 
 
-sample_image = generator(z_placeholder, 1, z_dimensions)
+sample_image = generator(z_placeholder, 1, z_dimensions, True)
 z_batch = np.random.normal(-1, 1, size=[1, z_dimensions])
 temp = (sess.run(sample_image, feed_dict={z_placeholder: z_batch}))
 my_i = temp.squeeze()
-plt.imshow(my_i, cmap='gray_r')
+#plt.imshow(my_i, cmap='gray_r')
+plt.savefig('After Generated.png')
+print("Done.. Saving Image")
 
 
 # # Training Difficulties
